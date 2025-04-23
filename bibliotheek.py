@@ -51,4 +51,45 @@ bibliotheek = {
 # Je keuze menu is eigenlijk een if-elif-else statement. Je kunt de keuze van de gebruiker opslaan in een variabele en dan met if-elif-else bepalen wat er moet gebeuren.
 
 
-print("Welkom bij de bibliotheek!")
+def main():
+    keuze = 0
+    while keuze != "4":
+        print("Welkom bij de bibliotheek.")
+        print("1) Voeg een boek toe.")
+        print("2) Bekijk alle boeken.")
+        print("3) Bekijk alle boeken van een bepaald genre.")
+        print("4) Sluit het programma.")
+        keuze = input("Maak je keuze: ")
+
+        if keuze == "1":
+            print("Laten we een boek toevoegen...")
+            naam_boek = str(input("Vul hier de naam van het boek in: "))
+            naam_auteur = str(input("Vul hier de auteur van het boek in: "))
+            genre = str(input("Vul hier het genre van het boek in: "))
+            publicatiejaar = str(input("Vul hier het publiecatiejaar van het boek in: "))
+            bibliotheek[naam_boek] = {"auteur": naam_auteur, "genre": genre, "publicatiejaar": publicatiejaar}
+
+        elif keuze == "2":
+            print("Laten we alle boeken bekijken...")
+            for boek, info in bibliotheek.items():
+                print(f"- {boek} ({info['genre']}, {info['publicatiejaar']}) door {info['auteur']}")
+
+
+        elif keuze == "3":
+            print("Laten we alle boeken van een specifiek genre bekijken...")
+            genre_keuze = input("Vul het genre naar keuze in: ")
+            gevonden = False
+            for x, y in bibliotheek.items():
+                if y["genre"].lower() == genre_keuze.lower():
+                    print(f"- {x} door {y['auteur']}")
+                    gevonden = True
+            if not gevonden:
+                print("Geen boeken gevonden in dit genre.")
+
+        elif keuze == "4":
+            print("Tot ziens!")
+
+        else:
+            print("Ongeldige keuze. Probeer het opnieuw.")
+
+main()
